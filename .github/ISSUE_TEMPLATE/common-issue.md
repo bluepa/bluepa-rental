@@ -3,16 +3,13 @@ name: Common Issue
 about: Common 이슈 템플릿
 title: "[Common] "
 labels: common
-assignees: mon823, YaeheeChoe, zxcv859500, voiciphil
 
 ---
 
-## :bulb: 이슈 내용
-- 해당 이슈의 내용과 기대되는 결과를 적어주세요.
+## 이슈 내용
+-
 
-## :white_check_mark: 작업 내용
-- [ ] Todo1
-- [ ] Todo2
-
-## :rotating_light: 주의 사항
-- 작업 시 주의할 사항을 적어주세요.
+## 작업 내용
+- [ ] To Do1
+- [ ] To Do2
+## 주의 사항
