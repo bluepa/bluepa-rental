@@ -3,7 +3,6 @@ name: FE Issue
 about: FE 이슈 템플릿
 title: "[FE] "
 labels: frontend
-assignees: mon823, YaeheeChoe
 
 ---
 
