@@ -3,6 +3,7 @@ name: BE Issue
 about: BE 이슈 템플릿
 title: "[BE] "
 labels: backend
+
 ---
 
 ## 이슈 내용
