@@ -1,3 +1,10 @@
 spring:
   profiles:
     active: local
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
