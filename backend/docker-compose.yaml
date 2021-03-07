@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0.12
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: bluepa
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+
+  app:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    args:
+      - JAR_FILE
+    ports:
+      - 3000:3000
+    restart: always
+    environment:
+      MYSQL_DB_HOST: db:3306
+      MYSQL_DB_USER: test
+      MYSQL_DB_PASSWORD: test
+      MYSQL_DB_NAME: bluepa
