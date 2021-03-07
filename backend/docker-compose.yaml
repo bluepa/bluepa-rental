@@ -17,8 +17,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    args:
-      - JAR_FILE
+      args:
+        - JAR_FILE
     ports:
       - 3000:3000
     restart: always
