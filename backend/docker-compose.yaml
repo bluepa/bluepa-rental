@@ -3,7 +3,7 @@ services:
   db:
     image: mysql:8.0.12
     volumes:
-      - db_data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: test
@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - JAR_FILE
+        - JAR_FILE=build/libs/*.jar
     ports:
       - 3000:3000
     restart: always
