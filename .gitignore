@@ -39,4 +39,4 @@ out/
 ### Properties ###
 application-*.yml
 
-/db_data/
+**/db_data/
