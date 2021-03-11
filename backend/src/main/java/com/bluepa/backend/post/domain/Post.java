@@ -14,7 +14,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 @Document(indexName = "post")
 public class Post {
   @Id
-  private int id;
+  private Integer id;
   @CreatedDate
   @Field(type = FieldType.Date, format = DateFormat.basic_date)
   private Instant createdDate;
