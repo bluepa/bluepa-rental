@@ -1,7 +1,9 @@
 package com.bluepa.backend.user.service;
 
+import com.bluepa.backend.global.exception.NotFoundEntityException;
 import com.bluepa.backend.user.domain.User;
 import com.bluepa.backend.user.domain.UserRepository;
+import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,5 +27,10 @@ public class UserServiceImpl implements UserService {
         User result = userRepository.save(user);
 
         return result.getId();
+    }
+
+    @Override
+    public String login(SignInRequest signInRequest) {
+        return null;
     }
 }
