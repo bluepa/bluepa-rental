@@ -56,12 +56,15 @@ public class UserServiceTest {
             .password("abc123")
             .nickname("aaa")
             .build();
+        EmailAuth emailAuth = new EmailAuth("aaa@gmail.com,123456,true");
         when(passwordEncoder.encode(any())).thenReturn("abc123");
         when(userRepository.save(any())).thenReturn(user);
+        when(emailAuthRepository.findByEmail("aaa@gmail.com")).thenReturn(Optional.of(emailAuth));
 
         Long userId = userService.signUp(signUpRequest);
 
         verify(userRepository).save(any());
+        verify(emailAuthRepository).deleteByEmail("aaa@gmail.com");
         assertThat(userId).isEqualTo(user.getId());
     }
 
