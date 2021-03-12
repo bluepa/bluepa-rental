@@ -2,6 +2,7 @@ package com.bluepa.backend.user.service;
 
 import com.bluepa.backend.global.exception.AlreadyExistsEntityException;
 import com.bluepa.backend.global.exception.DifferentCodeException;
+import com.bluepa.backend.global.exception.NotAuthenticatedEmailException;
 import com.bluepa.backend.global.exception.NotFoundEntityException;
 import com.bluepa.backend.global.exception.NotMatchedPasswordException;
 import com.bluepa.backend.global.security.JwtProvider;
@@ -33,6 +34,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long signUp(SignUpRequest request) {
+        EmailAuth emailAuth = emailAuthRepository.findByEmail(request.getEmail())
+            .orElseThrow(NotFoundEntityException::new);
+
+        if (!emailAuth.isChecked()) {
+            throw new NotAuthenticatedEmailException();
+        }
+
+        emailAuthRepository.deleteByEmail(request.getEmail());
+
         User user = User.builder()
             .email(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
