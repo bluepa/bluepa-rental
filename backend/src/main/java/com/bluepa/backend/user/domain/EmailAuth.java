@@ -7,7 +7,7 @@ public class EmailAuth {
 
     private final String email;
     private final int code;
-    private final boolean isChecked;
+    private boolean isChecked;
     private final String delimiter = ",";
 
     public EmailAuth(String email, int code) {
@@ -21,6 +21,14 @@ public class EmailAuth {
         this.email = strings[0];
         this.code = Integer.parseInt(strings[1]);
         this.isChecked = Boolean.parseBoolean(strings[2]);
+    }
+
+    public boolean isDifferentCode(int code) {
+        return this.code != code;
+    }
+
+    public void check() {
+        this.isChecked = true;
     }
 
     @Override

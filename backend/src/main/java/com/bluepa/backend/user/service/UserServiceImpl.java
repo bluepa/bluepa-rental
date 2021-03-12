@@ -1,12 +1,12 @@
 package com.bluepa.backend.user.service;
 
 import com.bluepa.backend.global.exception.AlreadyExistsEntityException;
+import com.bluepa.backend.global.exception.DifferentCodeException;
 import com.bluepa.backend.global.exception.NotFoundEntityException;
 import com.bluepa.backend.global.exception.NotMatchedPasswordException;
 import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.EmailAuth;
 import com.bluepa.backend.user.domain.User;
-import com.bluepa.backend.user.dto.EmailRequest;
 import com.bluepa.backend.user.repository.EmailAuthRepository;
 import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
@@ -77,6 +77,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void authenticateEmail(String email, int code) {
+        EmailAuth emailAuth = emailAuthRepository.findByEmail(email)
+            .orElseThrow(NotFoundEntityException::new);
 
+        if (emailAuth.isDifferentCode(code)) {
+            throw new DifferentCodeException();
+        }
+
+        emailAuth.check();
+        emailAuthRepository.save(emailAuth);
     }
 }
