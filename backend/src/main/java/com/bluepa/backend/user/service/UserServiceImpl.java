@@ -4,7 +4,7 @@ import com.bluepa.backend.global.exception.NotFoundEntityException;
 import com.bluepa.backend.global.exception.NotMatchedPasswordException;
 import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.User;
-import com.bluepa.backend.user.domain.UserRepository;
+import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
 import lombok.RequiredArgsConstructor;

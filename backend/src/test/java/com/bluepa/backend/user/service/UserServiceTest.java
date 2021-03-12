@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 
 import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.User;
-import com.bluepa.backend.user.domain.UserRepository;
+import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
 import java.util.Optional;

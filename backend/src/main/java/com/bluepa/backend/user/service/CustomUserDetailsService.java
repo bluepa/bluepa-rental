@@ -1,7 +1,7 @@
 package com.bluepa.backend.user.service;
 
 import com.bluepa.backend.global.exception.NotFoundEntityException;
-import com.bluepa.backend.user.domain.UserRepository;
+import com.bluepa.backend.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
