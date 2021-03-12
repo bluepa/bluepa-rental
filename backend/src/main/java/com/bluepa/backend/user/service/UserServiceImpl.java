@@ -1,6 +1,8 @@
 package com.bluepa.backend.user.service;
 
 import com.bluepa.backend.global.exception.NotFoundEntityException;
+import com.bluepa.backend.global.exception.NotMatchedPasswordException;
+import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.User;
 import com.bluepa.backend.user.domain.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
@@ -15,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
 
     @Override
     public Long register(SignUpRequest signUpRequest) {
@@ -31,6 +34,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(SignInRequest signInRequest) {
-        return null;
+        User user = userRepository.findByEmail(signInRequest.getEmail())
+            .orElseThrow(NotFoundEntityException::new);
+
+        if (!passwordEncoder.matches(signInRequest.getPassword(), user.getPassword())) {
+            throw new NotMatchedPasswordException();
+        }
+
+        return jwtProvider.createToken(user.getEmail(), user.getId(), user.getRole());
     }
 }
