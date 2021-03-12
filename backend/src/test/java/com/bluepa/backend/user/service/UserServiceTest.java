@@ -13,6 +13,7 @@ import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
 import java.util.Optional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,58 +28,55 @@ public class UserServiceTest {
 
     @InjectMocks
     UserServiceImpl userService;
-
     @Mock
     UserRepository userRepository;
-
     @Mock
     EmailAuthRepository emailAuthRepository;
-
     @Mock
     PasswordEncoder passwordEncoder;
-
     @Mock
     JwtProvider provider;
-
     @Mock
     JavaMailSender javaMailSender;
+
+    String email;
+    String password;
+    User user;
+
+    @BeforeEach
+    void init() {
+        email = "aaa@gmail.com";
+        password = "abc123";
+        user = User.builder()
+            .id(1L)
+            .email(email)
+            .password(password)
+            .build();
+    }
 
     @Test
     void 회원가입() {
         SignUpRequest signUpRequest = SignUpRequest.builder()
-            .email("aaa@gmail.com")
-            .password("abc123")
-            .nickname("aaa")
-            .build();
-        User user = User.builder()
-            .id(1L)
-            .email("aaa@gmail.com")
-            .password("abc123")
-            .nickname("aaa")
+            .email(email)
+            .password(password)
             .build();
         EmailAuth emailAuth = new EmailAuth("aaa@gmail.com,123456,true");
-        when(passwordEncoder.encode(any())).thenReturn("abc123");
+        when(passwordEncoder.encode(any())).thenReturn(password);
         when(userRepository.save(any())).thenReturn(user);
-        when(emailAuthRepository.findByEmail("aaa@gmail.com")).thenReturn(Optional.of(emailAuth));
+        when(emailAuthRepository.findByEmail(email)).thenReturn(Optional.of(emailAuth));
 
         Long userId = userService.signUp(signUpRequest);
 
         verify(userRepository).save(any());
-        verify(emailAuthRepository).deleteByEmail("aaa@gmail.com");
+        verify(emailAuthRepository).deleteByEmail(email);
         assertThat(userId).isEqualTo(user.getId());
     }
 
     @Test
     void 로그인() {
         SignInRequest signInRequest = SignInRequest.builder()
-            .email("aaa@gmail.com")
-            .password("abc123")
-            .build();
-        User user = User.builder()
-            .id(1L)
-            .email("aaa@gmail.com")
-            .password("abc123")
-            .nickname("aaa")
+            .email(email)
+            .password(password)
             .build();
         when(passwordEncoder.matches(any(), any())).thenReturn(true);
         when(userRepository.findByEmail(any())).thenReturn(Optional.of(user));
@@ -91,7 +89,6 @@ public class UserServiceTest {
 
     @Test
     void 이메일_전송() {
-        String email = "voiciphil@gmail.com";
         when(userRepository.existsByEmail(email)).thenReturn(false);
 
         userService.sendEmail(email);
@@ -102,7 +99,6 @@ public class UserServiceTest {
 
     @Test
     void 이메일_인증() {
-        String email = "aaa@gmail.com";
         EmailAuth emailAuth = new EmailAuth(email, 123456);
         when(emailAuthRepository.findByEmail(email)).thenReturn(Optional.of(emailAuth));
 
