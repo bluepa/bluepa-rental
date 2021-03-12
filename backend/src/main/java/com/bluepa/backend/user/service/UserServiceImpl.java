@@ -6,6 +6,7 @@ import com.bluepa.backend.global.exception.NotMatchedPasswordException;
 import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.EmailAuth;
 import com.bluepa.backend.user.domain.User;
+import com.bluepa.backend.user.dto.EmailRequest;
 import com.bluepa.backend.user.repository.EmailAuthRepository;
 import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
@@ -72,5 +73,10 @@ public class UserServiceImpl implements UserService {
 
         javaMailSender.send(message);
         emailAuthRepository.save(new EmailAuth(email, code));
+    }
+
+    @Override
+    public void authenticateEmail(String email, int code) {
+
     }
 }

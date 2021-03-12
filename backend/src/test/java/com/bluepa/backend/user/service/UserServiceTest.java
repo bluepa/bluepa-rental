@@ -6,13 +6,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.bluepa.backend.global.security.JwtProvider;
+import com.bluepa.backend.user.domain.EmailAuth;
 import com.bluepa.backend.user.domain.User;
 import com.bluepa.backend.user.repository.EmailAuthRepository;
 import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
 import java.util.Optional;
-import javax.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -95,5 +95,16 @@ public class UserServiceTest {
 
         verify(emailAuthRepository).save(any());
         verify(javaMailSender).send((SimpleMailMessage) any());
+    }
+
+    @Test
+    void 이메일_인증() {
+        String email = "aaa@gmail.com";
+        EmailAuth emailAuth = new EmailAuth(email, 123456);
+        when(emailAuthRepository.findByEmail(email)).thenReturn(Optional.of(emailAuth));
+
+        userService.authenticateEmail(email, 123456);
+
+        assertThat(emailAuth.isChecked()).isTrue();
     }
 }
