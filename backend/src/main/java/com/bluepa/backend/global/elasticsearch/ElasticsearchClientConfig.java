@@ -1,4 +1,4 @@
-package com.bluepa.backend.config;
+package com.bluepa.backend.global.elasticsearch;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
