@@ -13,19 +13,19 @@ import static org.assertj.core.api.Assertions.*;
 @Transactional
 class PostServiceTest {
 
-  @Autowired PostService postService;
+    @Autowired PostService postService;
 
-  @Test
-  void write() {
-    Post post = new Post();
-    post.setTitle("test Title");
-    post.setAuthor("test Author");
-    post.setContent("set Content");
-    post.setLocation(GeoJsonPoint.of(100, 100));
+    @Test
+    void write() {
+        Post post = new Post();
+        post.setTitle("test Title");
+        post.setAuthor("test Author");
+        post.setContent("set Content");
+        post.setLocation(GeoJsonPoint.of(100, 100));
 
-    String saveId = postService.write(post);
+        String saveId = postService.write(post);
 
-    Post findPost = postService.findOne(saveId).get();
-    assertThat(post).isEqualTo(findPost);
-  }
+        Post findPost = postService.findOne(saveId).get();
+        assertThat(post).isEqualTo(findPost);
+    }
 }
