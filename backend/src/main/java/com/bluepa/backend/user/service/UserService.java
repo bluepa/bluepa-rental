@@ -8,4 +8,6 @@ public interface UserService {
     Long signUp(SignUpRequest request);
 
     String signIn(SignInRequest request);
+
+    void sendEmail(String email);
 }

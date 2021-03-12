@@ -7,15 +7,19 @@ import static org.mockito.Mockito.when;
 
 import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.User;
+import com.bluepa.backend.user.repository.EmailAuthRepository;
 import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
 import java.util.Optional;
+import javax.mail.internet.MimeMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,10 +32,16 @@ public class UserServiceTest {
     UserRepository userRepository;
 
     @Mock
+    EmailAuthRepository emailAuthRepository;
+
+    @Mock
     PasswordEncoder passwordEncoder;
 
     @Mock
     JwtProvider provider;
+
+    @Mock
+    JavaMailSender javaMailSender;
 
     @Test
     void 회원가입() {
@@ -74,5 +84,16 @@ public class UserServiceTest {
         String token = userService.signIn(signInRequest);
 
         assertThat(token).isNotNull();
+    }
+
+    @Test
+    void 이메일_전송() {
+        String email = "voiciphil@gmail.com";
+        when(userRepository.existsByEmail(email)).thenReturn(false);
+
+        userService.sendEmail(email);
+
+        verify(emailAuthRepository).save(any());
+        verify(javaMailSender).send((SimpleMailMessage) any());
     }
 }

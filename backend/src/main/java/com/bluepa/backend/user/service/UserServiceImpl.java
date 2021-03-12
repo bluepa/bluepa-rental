@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
 
         return jwtProvider.createToken(user);
     }
+
+    @Override
+    public void sendEmail(String email) {
+
+    }
 }
