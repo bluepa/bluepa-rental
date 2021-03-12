@@ -34,14 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long signUp(SignUpRequest request) {
-        EmailAuth emailAuth = emailAuthRepository.findByEmail(request.getEmail())
-            .orElseThrow(NotFoundEntityException::new);
-
-        if (!emailAuth.isChecked()) {
-            throw new NotAuthenticatedEmailException();
-        }
-
-        emailAuthRepository.deleteByEmail(request.getEmail());
+        checkEmailIsAuthenticated(request.getEmail());
 
         User user = User.builder()
             .email(request.getEmail())
@@ -96,5 +89,16 @@ public class UserServiceImpl implements UserService {
 
         emailAuth.check();
         emailAuthRepository.save(emailAuth);
+    }
+
+    private void checkEmailIsAuthenticated(String email) {
+        EmailAuth emailAuth = emailAuthRepository.findByEmail(email)
+            .orElseThrow(NotAuthenticatedEmailException::new);
+
+        if (!emailAuth.isChecked()) {
+            throw new NotAuthenticatedEmailException();
+        }
+
+        emailAuthRepository.deleteByEmail(email);
     }
 }
