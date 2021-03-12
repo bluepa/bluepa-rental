@@ -1,5 +1,6 @@
 package com.bluepa.backend.global.security;
 
+import com.bluepa.backend.user.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -29,10 +30,10 @@ public class JwtProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String email, Long id, String role) {
-        Claims claims = Jwts.claims().setSubject(email);
-        claims.put("id", id);
-        claims.put("role", role);
+    public String createToken(User user) {
+        Claims claims = Jwts.claims().setSubject(user.getEmail());
+        claims.put("id", user.getId());
+        claims.put("role", user.getRole());
         Date now = new Date();
 
         return Jwts.builder()

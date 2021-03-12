@@ -41,6 +41,6 @@ public class UserServiceImpl implements UserService {
             throw new NotMatchedPasswordException();
         }
 
-        return jwtProvider.createToken(user.getEmail(), user.getId(), user.getRole());
+        return jwtProvider.createToken(user);
     }
 }
