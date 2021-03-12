@@ -5,7 +5,7 @@ import com.bluepa.backend.user.dto.SignUpRequest;
 
 public interface UserService {
 
-    Long register(SignUpRequest signUpRequest);
+    Long signUp(SignUpRequest request);
 
     String signIn(SignInRequest request);
 }

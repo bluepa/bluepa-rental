@@ -20,11 +20,11 @@ public class UserServiceImpl implements UserService {
     private final JwtProvider jwtProvider;
 
     @Override
-    public Long register(SignUpRequest signUpRequest) {
+    public Long signUp(SignUpRequest request) {
         User user = User.builder()
-            .email(signUpRequest.getEmail())
-            .password(passwordEncoder.encode(signUpRequest.getPassword()))
-            .nickname(signUpRequest.getNickname())
+            .email(request.getEmail())
+            .password(passwordEncoder.encode(request.getPassword()))
+            .nickname(request.getNickname())
             .build();
 
         User result = userRepository.save(user);

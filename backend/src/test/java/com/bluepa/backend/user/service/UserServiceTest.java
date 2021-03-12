@@ -49,7 +49,7 @@ public class UserServiceTest {
         when(passwordEncoder.encode(any())).thenReturn("abc123");
         when(userRepository.save(any())).thenReturn(user);
 
-        Long userId = userService.register(signUpRequest);
+        Long userId = userService.signUp(signUpRequest);
 
         verify(userRepository).save(any());
         assertThat(userId).isEqualTo(user.getId());

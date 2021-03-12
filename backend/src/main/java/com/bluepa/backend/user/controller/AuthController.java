@@ -23,8 +23,8 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<?> register(@RequestBody SignUpRequest request) {
-        Long userId = userService.register(request);
+    public ResponseEntity<?> signUp(@RequestBody SignUpRequest request) {
+        Long userId = userService.signUp(request);
         return ResponseEntity.created(URI.create("/api/users/" + userId)).build();
     }
 
