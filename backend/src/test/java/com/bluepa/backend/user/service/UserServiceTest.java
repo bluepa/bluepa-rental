@@ -69,7 +69,7 @@ public class UserServiceTest {
             .build();
         when(passwordEncoder.matches(any(), any())).thenReturn(true);
         when(userRepository.findByEmail(any())).thenReturn(Optional.of(user));
-        when(provider.createToken(any(), any(), any())).thenReturn("token");
+        when(provider.createToken(user)).thenReturn("token");
 
         String token = userService.signIn(signInRequest);
 
