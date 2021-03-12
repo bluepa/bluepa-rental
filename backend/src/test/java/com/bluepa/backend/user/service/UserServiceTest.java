@@ -71,7 +71,7 @@ public class UserServiceTest {
         when(userRepository.findByEmail(any())).thenReturn(Optional.of(user));
         when(provider.createToken(any(), any(), any())).thenReturn("token");
 
-        String token = userService.login(signInRequest);
+        String token = userService.signIn(signInRequest);
 
         assertThat(token).isNotNull();
     }

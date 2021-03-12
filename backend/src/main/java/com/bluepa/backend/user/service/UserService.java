@@ -7,5 +7,5 @@ public interface UserService {
 
     Long register(SignUpRequest signUpRequest);
 
-    String login(SignInRequest signInRequest);
+    String signIn(SignInRequest request);
 }

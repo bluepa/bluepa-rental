@@ -33,11 +33,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(SignInRequest signInRequest) {
-        User user = userRepository.findByEmail(signInRequest.getEmail())
+    public String signIn(SignInRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
             .orElseThrow(NotFoundEntityException::new);
 
-        if (!passwordEncoder.matches(signInRequest.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new NotMatchedPasswordException();
         }
 
