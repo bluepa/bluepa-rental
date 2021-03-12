@@ -19,7 +19,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
-        Optional<String> token = Optional.of(provider.resolveToken((HttpServletRequest) request));
+        Optional<String> token = Optional
+            .ofNullable(provider.resolveToken((HttpServletRequest) request));
 
         if (token.map(provider::isValidateToken).orElse(false)) {
             SecurityContextHolder.getContext()
