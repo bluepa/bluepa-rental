@@ -13,6 +13,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 @Data
 @Document(indexName = "post")
 public class Post {
+    
     @Id
     private String id;
     @CreatedDate
