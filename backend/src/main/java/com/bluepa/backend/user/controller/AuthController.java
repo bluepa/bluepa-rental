@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,12 @@ public class AuthController {
     @PostMapping("/mail")
     public ResponseEntity<?> sendEmail(@RequestBody EmailRequest request) {
         userService.sendEmail(request.getEmail());
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/mail")
+    public ResponseEntity<?> authenticateEmail(@RequestBody EmailRequest request) {
+        userService.authenticateEmail(request.getEmail(), request.getCode());
         return ResponseEntity.ok().build();
     }
 }
