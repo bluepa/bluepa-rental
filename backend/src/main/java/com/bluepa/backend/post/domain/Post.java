@@ -13,16 +13,16 @@ import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 @Data
 @Document(indexName = "post")
 public class Post {
-  @Id
-  private String id;
-  @CreatedDate
-  @Field(type = FieldType.Date, format = DateFormat.basic_date)
-  private Instant createdDate;
-  private GeoJsonPoint location;
-  @Field(type = FieldType.Text, store = true)
-  private String title;
-  @Field(type = FieldType.Keyword, store = true)
-  private String author;
-  @Field(type = FieldType.Text, store = true)
-  private String content;
+    @Id
+    private String id;
+    @CreatedDate
+    @Field(type = FieldType.Date, format = DateFormat.basic_date)
+    private Instant createdDate;
+    private GeoJsonPoint location;
+    @Field(type = FieldType.Text, store = true)
+    private String title;
+    @Field(type = FieldType.Keyword, store = true)
+    private String author;
+    @Field(type = FieldType.Text, store = true)
+    private String content;
 }

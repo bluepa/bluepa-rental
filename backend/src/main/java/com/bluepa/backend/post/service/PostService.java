@@ -8,24 +8,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostService {
 
-  private final PostRepository postRepository;
+    private final PostRepository postRepository;
 
-  public PostService(PostRepository postRepository) {
-    this.postRepository = postRepository;
-  }
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
 
-  /**
-   * 글쓰기
-   */
-  public String write(Post post) {
-    postRepository.save(post);
-    return post.getId();
-  }
+    /**
+     * 글쓰기
+     */
+    public String write(Post post) {
+        postRepository.save(post);
+        return post.getId();
+    }
 
-  /**
-   * 글 조회
-   */
-  public Optional<Post> findOne(String id){
-    return postRepository.findById(id);
-  }
+    /**
+     * 글 조회
+     */
+    public Optional<Post> findOne(String id){
+        return postRepository.findById(id);
+    }
 }
