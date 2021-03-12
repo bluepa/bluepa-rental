@@ -1,6 +1,7 @@
 package com.bluepa.backend.user.controller;
 
 import com.bluepa.backend.global.security.JwtProperties;
+import com.bluepa.backend.user.dto.EmailRequest;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
 import com.bluepa.backend.user.service.UserService;
@@ -34,5 +35,11 @@ public class AuthController {
         HttpHeaders headers = new HttpHeaders();
         headers.add(JwtProperties.HEADER, JwtProperties.TYPE + " " + token);
         return ResponseEntity.ok().headers(headers).build();
+    }
+
+    @PostMapping("/mail")
+    public ResponseEntity<?> sendEmail(@RequestBody EmailRequest request) {
+        userService.sendEmail(request.getEmail());
+        return ResponseEntity.ok().build();
     }
 }
