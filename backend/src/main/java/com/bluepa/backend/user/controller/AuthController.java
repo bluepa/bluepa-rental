@@ -38,13 +38,13 @@ public class AuthController {
         return ResponseEntity.ok().headers(headers).build();
     }
 
-    @PostMapping("/mail")
+    @PostMapping("/mail/send")
     public ResponseEntity<?> sendEmail(@RequestBody EmailRequest request) {
         userService.sendEmail(request.getEmail());
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/mail")
+    @PostMapping("/mail/check")
     public ResponseEntity<?> authenticateEmail(@RequestBody EmailRequest request) {
         userService.authenticateEmail(request.getEmail(), request.getCode());
         return ResponseEntity.ok().build();
