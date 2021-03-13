@@ -66,16 +66,18 @@ public class UserServiceImpl implements UserService {
             throw new AlreadyExistsEntityException();
         }
 
-        int code = (int) (Math.random() * 900000 + 100000);
+        int authCode = (int) (Math.random() * 900000 + 100000);
+        emailAuthRepository.save(new EmailAuth(email, authCode));
+        javaMailSender.send(createAuthMail(email, authCode));
+    }
 
+    private SimpleMailMessage createAuthMail(String to, int authCode) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(serviceEmail);
-        message.setTo(email);
+        message.setTo(to);
         message.setSubject("Bluepa Rental 인증번호입니다.");
-        message.setText("인증번호는 " + code + "입니다.");
-
-        javaMailSender.send(message);
-        emailAuthRepository.save(new EmailAuth(email, code));
+        message.setText("인증번호는 " + authCode + "입니다.");
+        return message;
     }
 
     @Override
