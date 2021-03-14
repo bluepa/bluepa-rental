@@ -48,6 +48,17 @@ public class UserServiceImpl implements UserService {
         return result.getId();
     }
 
+    private void checkEmailIsAuthenticated(String email) {
+        EmailAuth emailAuth = emailAuthRepository.findByEmail(email)
+            .orElseThrow(NotAuthenticatedEmailException::new);
+
+        if (!emailAuth.isChecked()) {
+            throw new NotAuthenticatedEmailException();
+        }
+
+        emailAuthRepository.deleteByEmail(email);
+    }
+
     @Override
     public String signIn(SignInRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
@@ -91,16 +102,5 @@ public class UserServiceImpl implements UserService {
 
         emailAuth.check();
         emailAuthRepository.save(emailAuth);
-    }
-
-    private void checkEmailIsAuthenticated(String email) {
-        EmailAuth emailAuth = emailAuthRepository.findByEmail(email)
-            .orElseThrow(NotAuthenticatedEmailException::new);
-
-        if (!emailAuth.isChecked()) {
-            throw new NotAuthenticatedEmailException();
-        }
-
-        emailAuthRepository.deleteByEmail(email);
     }
 }
