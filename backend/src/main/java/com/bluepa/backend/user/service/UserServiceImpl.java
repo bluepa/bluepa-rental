@@ -50,10 +50,10 @@ public class UserServiceImpl implements UserService {
 
     private void checkEmailIsAuthenticated(String email) {
         EmailAuth emailAuth = emailAuthRepository.findByEmail(email)
-            .orElseThrow(NotAuthenticatedEmailException::new);
+            .orElseThrow(() -> new NotAuthenticatedEmailException(email));
 
         if (!emailAuth.isChecked()) {
-            throw new NotAuthenticatedEmailException();
+            throw new NotAuthenticatedEmailException(email);
         }
 
         emailAuthRepository.deleteByEmail(email);
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String signIn(SignInRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
-            .orElseThrow(NotFoundEntityException::new);
+            .orElseThrow(() -> new NotFoundEntityException(User.class, "email", request.getEmail()));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new NotMatchedPasswordException();
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void sendEmail(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new AlreadyExistingEntityException();
+            throw new AlreadyExistingEntityException(User.class, "email", email);
         }
 
         int authCode = (int) (Math.random() * 900000 + 100000);
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void authenticateEmail(String email, int code) {
         EmailAuth emailAuth = emailAuthRepository.findByEmail(email)
-            .orElseThrow(NotFoundEntityException::new);
+            .orElseThrow(() -> new NotFoundEntityException(EmailAuth.class, "email", email));
 
         if (emailAuth.isDifferentCode(code)) {
             throw new DifferentCodeException();

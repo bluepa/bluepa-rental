@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class DifferentCodeException extends RuntimeException {
 
     public DifferentCodeException() {
-        super();
+        super("올바르지 않은 인증번호입니다.");
     }
 }
