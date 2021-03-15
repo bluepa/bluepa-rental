@@ -1,6 +1,6 @@
 package com.bluepa.backend.user.service;
 
-import com.bluepa.backend.global.exception.AlreadyExistsEntityException;
+import com.bluepa.backend.global.exception.AlreadyExistingEntityException;
 import com.bluepa.backend.global.exception.DifferentCodeException;
 import com.bluepa.backend.global.exception.NotAuthenticatedEmailException;
 import com.bluepa.backend.global.exception.NotFoundEntityException;
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void sendEmail(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new AlreadyExistsEntityException();
+            throw new AlreadyExistingEntityException();
         }
 
         int authCode = (int) (Math.random() * 900000 + 100000);
