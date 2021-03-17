@@ -42,7 +42,7 @@ class PostServiceTest {
     }
 
     @Test
-    void write() {
+    void 글쓰기() {
         when(postRepository.save(any())).thenReturn(post);
         when(postRepository.findById(post.getId())).thenReturn(Optional.of(post));
 
