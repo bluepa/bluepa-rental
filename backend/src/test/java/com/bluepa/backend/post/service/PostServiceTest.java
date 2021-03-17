@@ -17,15 +17,21 @@ class PostServiceTest {
 
     @Test
     void write() {
-        Post post = new Post();
-        post.setTitle("test Title");
-        post.setAuthor("test Author");
-        post.setContent("set Content");
-        post.setLocation(GeoJsonPoint.of(100, 100));
+        Post post = Post.builder()
+            .title("test Title")
+            .author("test Author")
+            .content("test Content")
+            .location(GeoJsonPoint.of(100, 100))
+            .build();
 
         String saveId = postService.write(post);
 
         Post findPost = postService.findOne(saveId).get();
-        assertThat(post).isEqualTo(findPost);
+
+        assertThat(post.getId()).isEqualTo(findPost.getId());
+        assertThat(post.getTitle()).isEqualTo(findPost.getTitle());
+        assertThat(post.getAuthor()).isEqualTo(findPost.getAuthor());
+        assertThat(post.getContent()).isEqualTo(findPost.getContent());
+        assertThat(post.getLocation()).isEqualTo(findPost.getLocation());
     }
 }
