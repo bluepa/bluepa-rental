@@ -12,6 +12,7 @@ import com.bluepa.backend.user.repository.EmailAuthRepository;
 import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,7 +75,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String signIn(HttpSession httpSession) {
-        return null;
+        Optional<String> email = Optional.ofNullable((String) httpSession.getAttribute("email"));
+        User user = email.flatMap(userRepository::findByEmail)
+            .orElseThrow(() -> new NotFoundEntityException(User.class, "email", email.orElse(null)));
+        return jwtProvider.createToken(user);
     }
 
     @Override
