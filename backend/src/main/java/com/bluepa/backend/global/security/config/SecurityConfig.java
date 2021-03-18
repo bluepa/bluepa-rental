@@ -1,5 +1,8 @@
-package com.bluepa.backend.global.security;
+package com.bluepa.backend.global.security.config;
 
+import com.bluepa.backend.global.security.JwtAuthenticationFilter;
+import com.bluepa.backend.global.security.JwtProvider;
+import com.bluepa.backend.global.security.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final CustomOAuth2UserService customOAuth2UserService;
     private final JwtProvider provider;
 
     @Bean
@@ -32,13 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
             .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
             .authorizeRequests()
             .antMatchers("/api/auth/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(new JwtAuthenticationFilter(provider),
-                UsernamePasswordAuthenticationFilter.class);
+                UsernamePasswordAuthenticationFilter.class)
+            .oauth2Login()
+            .userInfoEndpoint()
+            .userService(customOAuth2UserService);
     }
 }
