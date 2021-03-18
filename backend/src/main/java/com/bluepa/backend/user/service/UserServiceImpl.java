@@ -12,6 +12,7 @@ import com.bluepa.backend.user.repository.EmailAuthRepository;
 import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -69,6 +70,11 @@ public class UserServiceImpl implements UserService {
         }
 
         return jwtProvider.createToken(user);
+    }
+
+    @Override
+    public String signIn(HttpSession httpSession) {
+        return null;
     }
 
     @Override
