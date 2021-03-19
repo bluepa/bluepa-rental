@@ -24,7 +24,7 @@ class PostServiceTest {
             .location(GeoJsonPoint.of(100, 100))
             .build();
 
-        String saveId = postService.write(post);
+        String saveId = postService.write(post, "iksan");
 
         Post findPost = postService.findOne(saveId).get();
 
