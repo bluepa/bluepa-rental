@@ -30,12 +30,13 @@ class PostServiceTest {
 
     @BeforeEach
     void init() {
-        post = new Post();
-        post.setId("axizd");
-        post.setTitle("test Title");
-        post.setAuthor("test Author");
-        post.setContent("set Content");
-        post.setLocation(GeoJsonPoint.of(100, 100));
+        post = Post.builder()
+            .id("axizd")
+            .title("test Title")
+            .author("test Author")
+            .content("set Content")
+            .location(GeoJsonPoint.of(100, 100))
+            .build();
     }
 
     @Test
@@ -43,7 +44,7 @@ class PostServiceTest {
         when(postRepository.save(any())).thenReturn(post);
         when(postRepository.findById(post.getId())).thenReturn(Optional.of(post));
 
-        String saveId = postService.write(post);
+        String saveId = postService.write(post, "iksan");
         Post findPost = postService.findOne(saveId).get();
 
         verify(postRepository).save(any());
