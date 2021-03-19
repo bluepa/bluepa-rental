@@ -17,9 +17,9 @@ import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(indexName = "post")
+@Document(indexName = "post-#{@postIndexNameConfig.getCityName()}")
 public class Post {
-    
+
     @Id
     private String id;
     @CreatedDate
