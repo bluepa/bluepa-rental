@@ -1,112 +1,57 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+// App.js
+import React, {Component} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import CustomButton from './CustomButton';
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+type Props = {};
+export default class App extends Component<Props> {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}><Text>header</Text></View>
+        <View style={styles.title}><Text style={styles.title_text}>안녕하세요{"\n"}지금 블루파-렌탈을{"\n"}시작하세요</Text></View>
+        <View style={styles.content}></View>
+        <View style={styles.footer}>
+          <CustomButton title={"로그인"}/>
+          <CustomButton title={"회원가입"}/>
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: 'white',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  header: {
+    width:'100%',
+    height:'9%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ff9a9a',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  title: {
+    width:'100%',
+    height:'18%',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: '#9aa9ff',
   },
-  highlight: {
-    fontWeight: '700',
+  title_text: {
+    textAlign:"left",
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  footer: {
+    width:'100%',
+    height:'20%',
+    backgroundColor: 'white',
   },
 });
-
-export default App;
