@@ -21,10 +21,11 @@ function StartPage({ navigation }) {
           <CustomButton
             buttonColor={'#444'}
             title={'회원가입'}
-            onPress={() => navigation.navigate('Login')}/>
+            onPress={() => navigation.navigate('Join')}/>
           <CustomButton
           buttonColor={'#023e73'}
           title={'로그인'}
+          onPress={() => navigation.navigate('Login')}
          />
         </View>
       </View>
