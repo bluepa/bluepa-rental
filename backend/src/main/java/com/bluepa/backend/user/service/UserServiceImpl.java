@@ -76,6 +76,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String signIn(HttpSession httpSession) {
         Optional<String> email = Optional.ofNullable((String) httpSession.getAttribute("email"));
+        httpSession.removeAttribute("email");
         User user = email.flatMap(userRepository::findByEmail)
             .orElseThrow(() -> new NotFoundEntityException(User.class, "email", email.orElse(null)));
         return jwtProvider.createToken(user);
