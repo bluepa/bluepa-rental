@@ -18,10 +18,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class PostServiceTest {
+class PostServiceImplTest {
 
     @InjectMocks
-    PostService postService;
+    PostServiceImpl postService;
 
     @Mock
     PostRepository postRepository;
