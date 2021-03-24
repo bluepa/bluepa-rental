@@ -2,6 +2,7 @@ package com.bluepa.backend.post.service;
 
 import static org.mockito.ArgumentMatchers.any;
 
+import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
 import com.bluepa.backend.post.repository.PostRepository;
 import java.util.Optional;
@@ -26,6 +27,9 @@ class PostServiceImplTest {
     @Mock
     PostRepository postRepository;
 
+    @Mock
+    PostIndexNameConfig postIndexNameConfig;
+
     Post post;
 
     @BeforeEach
@@ -49,6 +53,7 @@ class PostServiceImplTest {
 
         verify(postRepository).save(any());
         verify(postRepository).findById(post.getId());
+        verify(postIndexNameConfig).setCityName("iksan");
 
         assertThat(post).isEqualTo(findPost);
     }
