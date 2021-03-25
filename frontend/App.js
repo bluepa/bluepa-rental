@@ -5,7 +5,7 @@
  * @format
  * @flow strict-local
  */
-
+ import { registerRootComponent } from 'expo';
 import React from 'react';
 import type {Node} from 'react';
 import {
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+registerRootComponent(App);
