@@ -2,7 +2,6 @@ package com.bluepa.backend.post.service;
 
 import com.bluepa.backend.post.domain.Post;
 import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
