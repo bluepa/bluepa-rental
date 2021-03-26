@@ -2,11 +2,13 @@ package com.bluepa.backend.post.repository;
 
 import com.bluepa.backend.post.domain.Post;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.GeoDistanceQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -39,9 +41,6 @@ public class PostRepositoryImpl implements PostRepository {
         SearchHits<Post> searchHits = elasticsearchOperations
                 .search(query, Post.class);
 
-        List<Post> posts = new ArrayList<>();
-
-        searchHits.forEach(item -> posts.add(item.getContent()));
-        return posts;
+        return searchHits.stream().map(SearchHit::getContent).collect(Collectors.toList());
     }
 }
