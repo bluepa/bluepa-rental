@@ -64,7 +64,7 @@ class PostServiceTest {
     void 검색() {
         when(postRepository.searchPost("test Title", GeoJsonPoint.of(123, 123))).thenReturn(List.of(post));
 
-        List<Post> posts = postRepository.searchPost("test", GeoJsonPoint.of(123, 123));
+        List<Post> posts = postRepository.searchPost("test Title", GeoJsonPoint.of(123, 123));
 
         verify(postRepository).searchPost("test Title", GeoJsonPoint.of(123, 123));
 
