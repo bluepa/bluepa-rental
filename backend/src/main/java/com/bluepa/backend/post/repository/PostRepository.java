@@ -1,10 +1,11 @@
 package com.bluepa.backend.post.repository;
 
 import com.bluepa.backend.post.domain.Post;
-import java.util.Optional;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 
-public interface PostRepository extends ElasticsearchRepository<Post, String> {
+import java.util.List;
 
-    Optional<Post> findById(String id);
+public interface PostRepository {
+
+    List<Post> searchPost(String keyword, GeoJsonPoint location);
 }
