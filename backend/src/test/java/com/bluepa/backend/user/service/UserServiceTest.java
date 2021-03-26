@@ -3,7 +3,7 @@ package com.bluepa.backend.user.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import static org.mockito.BDDMockito.then;
 
 import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.EmailAuth;
@@ -67,8 +67,8 @@ public class UserServiceTest {
 
         Long userId = userService.signUp(signUpRequest);
 
-        verify(userRepository).save(any());
-        verify(emailAuthRepository).deleteByEmail(email);
+        then(userRepository).should().save(any());
+        then(emailAuthRepository).should().deleteByEmail(email);
         assertThat(userId).isEqualTo(user.getId());
     }
 
@@ -93,8 +93,8 @@ public class UserServiceTest {
 
         userService.sendEmail(email);
 
-        verify(emailAuthRepository).save(any());
-        verify(javaMailSender).send((SimpleMailMessage) any());
+        then(emailAuthRepository).should().save(any());
+        then(javaMailSender).should().send((SimpleMailMessage) any());
     }
 
     @Test

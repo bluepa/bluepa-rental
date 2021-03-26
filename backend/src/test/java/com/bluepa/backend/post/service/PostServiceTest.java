@@ -16,7 +16,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
+import static org.mockito.BDDMockito.then;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
@@ -51,9 +51,8 @@ class PostServiceTest {
         String saveId = postService.write(post, "iksan");
         Post findPost = postService.findOne(saveId).get();
 
-        verify(postRepository).save(any());
-        verify(postRepository).findById(post.getId());
-
+        then(postRepository).should().save(any());
+        then(postRepository).should().findById(post.getId());
         assertThat(post).isEqualTo(findPost);
     }
 }
