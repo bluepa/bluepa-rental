@@ -7,6 +7,7 @@ import com.bluepa.backend.post.repository.JpaPostRepository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,7 +44,7 @@ public class PostServiceImpl implements PostService {
     /**
      * 글 검색
      */
-    public List<Post> search(String keyword) {
-        return null;
+    public List<Post> search(String keyword, GeoJsonPoint location) {
+        return postRepository.searchPost(keyword, location);
     }
 }
