@@ -2,8 +2,8 @@ package com.bluepa.backend.user.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.EmailAuth;
@@ -61,9 +61,9 @@ public class UserServiceTest {
             .password(password)
             .build();
         EmailAuth emailAuth = new EmailAuth("aaa@gmail.com,123456,true");
-        when(passwordEncoder.encode(any())).thenReturn(password);
-        when(userRepository.save(any())).thenReturn(user);
-        when(emailAuthRepository.findByEmail(email)).thenReturn(Optional.of(emailAuth));
+        given(passwordEncoder.encode(any())).willReturn(password);
+        given(userRepository.save(any())).willReturn(user);
+        given(emailAuthRepository.findByEmail(email)).willReturn(Optional.of(emailAuth));
 
         Long userId = userService.signUp(signUpRequest);
 
@@ -78,9 +78,9 @@ public class UserServiceTest {
             .email(email)
             .password(password)
             .build();
-        when(passwordEncoder.matches(any(), any())).thenReturn(true);
-        when(userRepository.findByEmail(any())).thenReturn(Optional.of(user));
-        when(provider.createToken(user)).thenReturn("token");
+        given(passwordEncoder.matches(any(), any())).willReturn(true);
+        given(userRepository.findByEmail(any())).willReturn(Optional.of(user));
+        given(provider.createToken(user)).willReturn("token");
 
         String token = userService.signIn(signInRequest);
 
@@ -89,7 +89,7 @@ public class UserServiceTest {
 
     @Test
     void 이메일_전송() {
-        when(userRepository.existsByEmail(email)).thenReturn(false);
+        given(userRepository.existsByEmail(email)).willReturn(false);
 
         userService.sendEmail(email);
 
@@ -100,7 +100,7 @@ public class UserServiceTest {
     @Test
     void 이메일_인증() {
         EmailAuth emailAuth = new EmailAuth(email, 123456);
-        when(emailAuthRepository.findByEmail(email)).thenReturn(Optional.of(emailAuth));
+        given(emailAuthRepository.findByEmail(email)).willReturn(Optional.of(emailAuth));
 
         userService.authenticateEmail(email, 123456);
 

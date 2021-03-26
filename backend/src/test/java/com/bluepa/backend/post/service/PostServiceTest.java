@@ -2,6 +2,7 @@ package com.bluepa.backend.post.service;
 
 import static org.mockito.ArgumentMatchers.any;
 
+import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
 import com.bluepa.backend.post.repository.PostRepository;
 import java.util.Optional;
@@ -14,8 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
@@ -25,6 +26,9 @@ class PostServiceTest {
 
     @Mock
     PostRepository postRepository;
+
+    @Mock
+    PostIndexNameConfig postIndexNameConfig;
 
     Post post;
 
@@ -41,8 +45,8 @@ class PostServiceTest {
 
     @Test
     void 글쓰기() {
-        when(postRepository.save(any())).thenReturn(post);
-        when(postRepository.findById(post.getId())).thenReturn(Optional.of(post));
+        given(postRepository.save(any())).willReturn(post);
+        given(postRepository.findById(post.getId())).willReturn(Optional.of(post));
 
         String saveId = postService.write(post, "iksan");
         Post findPost = postService.findOne(saveId).get();
