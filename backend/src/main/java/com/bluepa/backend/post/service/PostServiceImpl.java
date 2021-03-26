@@ -40,6 +40,10 @@ public class PostServiceImpl implements PostService {
 
     /**
      * 글 검색
+     *
+     * @param keyword 검색어
+     * @param location 위도, 경도
+     * @return post 리스트
      */
     public List<Post> search(String keyword, GeoJsonPoint location) {
         return postRepository.searchPost(keyword, location);
