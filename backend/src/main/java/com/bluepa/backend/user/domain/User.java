@@ -29,14 +29,23 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
     @Column(nullable = false, unique = true)
     private String nickname;
 
     @Column
+    private String picture;
+
+    @Column
     private String role;
+
+    public User update(String nickname, String picture) {
+        this.nickname = nickname != null ? nickname : this.nickname;
+        this.picture = picture != null ? picture : this.picture;
+        return this;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -2,6 +2,7 @@ package com.bluepa.backend.user.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -13,6 +14,7 @@ import com.bluepa.backend.user.repository.UserRepository;
 import com.bluepa.backend.user.dto.SignInRequest;
 import com.bluepa.backend.user.dto.SignUpRequest;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,6 +40,8 @@ public class UserServiceTest {
     JwtProvider provider;
     @Mock
     JavaMailSender javaMailSender;
+    @Mock
+    HttpSession httpSession;
 
     String email;
     String password;
@@ -83,6 +87,17 @@ public class UserServiceTest {
         when(provider.createToken(user)).thenReturn("token");
 
         String token = userService.signIn(signInRequest);
+
+        assertThat(token).isNotNull();
+    }
+
+    @Test
+    void 소셜_로그인() {
+        given(httpSession.getAttribute("email")).willReturn(email);
+        given(userRepository.findByEmail(email)).willReturn(Optional.of(user));
+        given(provider.createToken(user)).willReturn("token");
+
+        String token = userService.signIn(httpSession);
 
         assertThat(token).isNotNull();
     }
