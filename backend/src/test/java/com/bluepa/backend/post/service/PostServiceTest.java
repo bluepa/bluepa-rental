@@ -4,7 +4,9 @@ import static org.mockito.ArgumentMatchers.any;
 
 import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
-import com.bluepa.backend.post.repository.PostRepository;
+import com.bluepa.backend.post.repository.JpaPostRepository;
+
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,13 +21,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class PostServiceImplTest {
+class PostServiceTest {
 
     @InjectMocks
     PostServiceImpl postService;
 
     @Mock
-    PostRepository postRepository;
+    JpaPostRepository postRepository;
 
     @Mock
     PostIndexNameConfig postIndexNameConfig;
@@ -56,5 +58,16 @@ class PostServiceImplTest {
         verify(postIndexNameConfig).setCityName("iksan");
 
         assertThat(post).isEqualTo(findPost);
+    }
+
+    @Test
+    void 검색() {
+        when(postRepository.searchPost("test Title", GeoJsonPoint.of(123, 123))).thenReturn(List.of(post));
+
+        List<Post> posts = postRepository.searchPost("test", GeoJsonPoint.of(123, 123));
+
+        verify(postRepository).searchPost("test Title", GeoJsonPoint.of(123, 123));
+
+        assertThat(post).isEqualTo(posts.get(0));
     }
 }
