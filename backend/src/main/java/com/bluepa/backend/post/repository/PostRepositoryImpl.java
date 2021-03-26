@@ -2,6 +2,7 @@ package com.bluepa.backend.post.repository;
 
 import com.bluepa.backend.post.domain.Post;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.GeoDistanceQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -17,13 +18,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepository {
 
     private final ElasticsearchOperations elasticsearchOperations;
-
-    public PostRepositoryImpl(ElasticsearchOperations elasticsearchOperations) {
-        this.elasticsearchOperations = elasticsearchOperations;
-    }
 
     public List<Post> searchPost(String keyword, GeoJsonPoint location) {
         int DISTANCE = 5;

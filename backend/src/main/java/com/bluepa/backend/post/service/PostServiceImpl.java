@@ -7,19 +7,16 @@ import com.bluepa.backend.post.repository.JpaPostRepository;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
     private final JpaPostRepository postRepository;
     private final PostIndexNameConfig postIndexNameConfig;
-
-    public PostServiceImpl(JpaPostRepository jpaPostRepository, PostIndexNameConfig postIndexNameConfig) {
-        this.postRepository = jpaPostRepository;
-        this.postIndexNameConfig = postIndexNameConfig;
-    }
 
     /**
      * 글쓰기
