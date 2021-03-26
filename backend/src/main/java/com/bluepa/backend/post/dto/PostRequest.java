@@ -13,7 +13,7 @@ public class PostRequest {
     GeoJsonPoint location;
     String cityName;
 
-    public Post build() {
+    public Post getPost() {
         return Post.builder()
                 .title(title)
                 .author(author)

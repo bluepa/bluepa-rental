@@ -32,7 +32,7 @@ public class PostController {
     @PostMapping("/write")
     public ResponseEntity<?> write(@RequestBody PostRequest postRequest) {
         String cityName = postRequest.getCityName();
-        Post post = postRequest.build();
+        Post post = postRequest.getPost();
 
         String postId = postService.write(post, cityName);
         return ResponseEntity.created(URI.create("/api/post/" + postId)).build();
