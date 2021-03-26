@@ -1,7 +1,6 @@
 package com.bluepa.backend.post.repository;
 
 import com.bluepa.backend.post.domain.Post;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 import org.elasticsearch.common.unit.DistanceUnit;
 import org.elasticsearch.index.query.GeoDistanceQueryBuilder;
