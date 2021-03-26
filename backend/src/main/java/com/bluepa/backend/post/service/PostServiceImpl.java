@@ -2,19 +2,21 @@ package com.bluepa.backend.post.service;
 
 import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
-import com.bluepa.backend.post.repository.PostRepository;
+import com.bluepa.backend.post.repository.JpaPostRepository;
+
+import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class PostServiceImpl implements PostService {
 
-    private final PostRepository postRepository;
+    private final JpaPostRepository postRepository;
     private final PostIndexNameConfig postIndexNameConfig;
 
-    public PostServiceImpl(PostRepository postRepository, PostIndexNameConfig postIndexNameConfig) {
-        this.postRepository = postRepository;
+    public PostServiceImpl(JpaPostRepository jpaPostRepository, PostIndexNameConfig postIndexNameConfig) {
+        this.postRepository = jpaPostRepository;
         this.postIndexNameConfig = postIndexNameConfig;
     }
 
@@ -36,5 +38,12 @@ public class PostServiceImpl implements PostService {
      */
     public Optional<Post> findOne(String id){
         return postRepository.findById(id);
+    }
+
+    /**
+     * 글 검색
+     */
+    public List<Post> search(String keyword) {
+        return null;
     }
 }
