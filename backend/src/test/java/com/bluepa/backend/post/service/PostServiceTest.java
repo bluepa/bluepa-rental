@@ -1,11 +1,13 @@
 package com.bluepa.backend.post.service;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
 import com.bluepa.backend.post.repository.JpaPostRepository;
-
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
@@ -47,27 +45,26 @@ class PostServiceTest {
 
     @Test
     void 글쓰기() {
-        when(postRepository.save(any())).thenReturn(post);
-        when(postRepository.findById(post.getId())).thenReturn(Optional.of(post));
+        given(postRepository.save(any())).willReturn(post);
+        given(postRepository.findById(post.getId())).willReturn(Optional.of(post));
 
         String saveId = postService.write(post, "iksan");
         Post findPost = postService.findOne(saveId).get();
 
-        verify(postRepository).save(any());
-        verify(postRepository).findById(post.getId());
-        verify(postIndexNameConfig).setCityName("iksan");
-
+        then(postRepository).should().save(any());
+        then(postRepository).should().findById(post.getId());
+        then(postIndexNameConfig).should().setCityName("iksan");
         assertThat(post).isEqualTo(findPost);
     }
 
     @Test
     void 검색() {
-        when(postRepository.searchPost("test Title", GeoJsonPoint.of(123, 123))).thenReturn(List.of(post));
+        given(postRepository.searchPost("test Title", GeoJsonPoint.of(123, 123)))
+            .willReturn(List.of(post));
 
         List<Post> posts = postService.search("test Title", GeoJsonPoint.of(123, 123));
 
-        verify(postRepository).searchPost("test Title", GeoJsonPoint.of(123, 123));
-
+        then(postRepository).should().searchPost("test Title", GeoJsonPoint.of(123, 123));
         assertThat(post).isEqualTo(posts.get(0));
     }
 }
