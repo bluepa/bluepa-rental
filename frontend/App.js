@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginPage from './LoginPage';
-import JoinPage from './JoinPage';
-import StartPage from './StartPage';
+import LoginPage from './login/LoginPage';
+import JoinPage from './login/JoinPage';
+import StartPage from './login/StartPage';
 
 const Stack = createStackNavigator();
 
