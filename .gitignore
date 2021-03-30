@@ -38,3 +38,5 @@ out/
 
 ### Properties ###
 application-*.yml
+
+**/db_data/
