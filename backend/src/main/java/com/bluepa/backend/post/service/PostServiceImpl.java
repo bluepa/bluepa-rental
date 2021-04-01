@@ -2,6 +2,8 @@ package com.bluepa.backend.post.service;
 
 import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
+import com.bluepa.backend.post.dto.FilterRequest;
+import com.bluepa.backend.post.dto.SearchRequest;
 import com.bluepa.backend.post.repository.JpaPostRepository;
 
 import java.util.List;
@@ -41,11 +43,11 @@ public class PostServiceImpl implements PostService {
     /**
      * 글 검색
      *
-     * @param keyword 검색어
-     * @param location 위도, 경도
+     * @param searchRequest 검색 dto
+     * @param filterRequest 필터 dto
      * @return post 리스트
      */
-    public List<Post> search(String keyword, GeoJsonPoint location) {
-        return postRepository.searchPost(keyword, location);
+    public List<Post> search(SearchRequest searchRequest, FilterRequest filterRequest) {
+        return postRepository.searchPost(searchRequest, filterRequest);
     }
 }
