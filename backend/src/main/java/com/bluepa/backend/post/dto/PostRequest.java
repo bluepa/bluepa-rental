@@ -12,6 +12,7 @@ public class PostRequest {
     String content;
     GeoJsonPoint location;
     String cityName;
+    Integer price;
 
     public Post getPost() {
         return Post.builder()
@@ -19,6 +20,7 @@ public class PostRequest {
                 .author(author)
                 .content(content)
                 .location(location)
+                .price(price)
                 .build();
     }
 }
