@@ -28,7 +28,7 @@ public class PostRepositoryImpl implements PostRepository {
 
     private final ElasticsearchOperations elasticsearchOperations;
 
-    public List<Post> searchPost(SearchRequest searchRequest, FilterRequest filter) {
+    public List<Post> searchPost(SearchRequest searchRequest, FilterRequest filterRequest) {
         final int DISTANCE = 5;
 
         String keyword = searchRequest.getKeyword();
@@ -36,8 +36,8 @@ public class PostRepositoryImpl implements PostRepository {
         String cityName = searchRequest.getCityName();
         String route = String.format("post-%s", cityName);
 
-        DateRange dateRange = filter.getDateRange();
-        PriceRange priceRange = filter.getPriceRange();
+        DateRange dateRange = filterRequest.getDateRange();
+        PriceRange priceRange = filterRequest.getPriceRange();
 
         QueryStringQueryBuilder stringQuery = QueryBuilders.queryStringQuery(keyword);
 

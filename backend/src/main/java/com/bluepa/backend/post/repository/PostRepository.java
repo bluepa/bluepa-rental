@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PostRepository {
 
-    List<Post> searchPost(SearchRequest searchRequest, FilterRequest filter);
+    List<Post> searchPost(SearchRequest searchRequest, FilterRequest filterRequest);
 }
