@@ -3,7 +3,6 @@ package com.bluepa.backend.post.service;
 import com.bluepa.backend.post.domain.Post;
 import com.bluepa.backend.post.dto.FilterRequest;
 import com.bluepa.backend.post.dto.SearchRequest;
-import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 
 import java.util.List;
 import java.util.Optional;

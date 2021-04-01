@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
 import org.springframework.stereotype.Service;
 
 @Service
