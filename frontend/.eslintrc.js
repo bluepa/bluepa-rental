@@ -12,4 +12,7 @@ module.exports = {
   rules: {
     'no-unused-vars': 0,
   },
+  setting:{
+    'babel-module':{},
+  }
 };
