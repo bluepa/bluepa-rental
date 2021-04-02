@@ -32,4 +32,6 @@ public class Post {
     private String author;
     @Field(type = FieldType.Text, store = true)
     private String content;
+    @Field(type = FieldType.Integer, store = true)
+    private Integer price;
 }

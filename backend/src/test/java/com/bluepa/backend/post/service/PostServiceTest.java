@@ -7,6 +7,7 @@ import static org.mockito.BDDMockito.then;
 
 import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
+import com.bluepa.backend.post.dto.SearchRequest;
 import com.bluepa.backend.post.repository.JpaPostRepository;
 import java.util.List;
 import java.util.Optional;
@@ -59,12 +60,16 @@ class PostServiceTest {
 
     @Test
     void 검색() {
-        given(postRepository.searchPost("test Title", GeoJsonPoint.of(123, 123)))
-            .willReturn(List.of(post));
+        SearchRequest searchRequest = SearchRequest.builder()
+                .keyword("test Title")
+                .cityName("iksan")
+                .location(GeoJsonPoint.of(123, 123))
+                .build();
+        given(postRepository.searchPost(searchRequest, null)).willReturn(List.of(post));
 
-        List<Post> posts = postService.search("test Title", GeoJsonPoint.of(123, 123));
+        List<Post> posts = postService.search(searchRequest, null);
 
-        then(postRepository).should().searchPost("test Title", GeoJsonPoint.of(123, 123));
+        then(postRepository).should().searchRequest(searchRequest, null);
         assertThat(post).isEqualTo(posts.get(0));
     }
 }

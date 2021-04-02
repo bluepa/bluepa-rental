@@ -1,6 +1,7 @@
 package com.bluepa.backend.post.controller;
 
 import com.bluepa.backend.post.domain.Post;
+import com.bluepa.backend.post.dto.FilterRequest;
 import com.bluepa.backend.post.dto.PostRequest;
 import com.bluepa.backend.post.dto.SearchRequest;
 import com.bluepa.backend.post.service.PostService;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/post")
+@RequestMapping("/api/posts")
 @RequiredArgsConstructor
 public class PostController {
 
@@ -39,7 +40,7 @@ public class PostController {
     }
 
     @PostMapping("/search")
-    public List<Post> search(@RequestBody SearchRequest searchRequest) {
-        return postService.search(searchRequest.getKeyword(), searchRequest.getLocation());
+    public List<Post> search(@RequestBody SearchRequest searchRequest, @RequestBody FilterRequest filterRequest) {
+        return postService.search(searchRequest, filterRequest);
     }
 }
