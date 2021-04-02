@@ -6,7 +6,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-export default class CustomButton extends Component{
+export default class BasicButton extends Component{
   static defaultProps = {
     title: 'untitled',
     buttonColor: '#000',

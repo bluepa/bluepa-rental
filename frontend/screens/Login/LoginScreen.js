@@ -1,12 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
-import CustomButton from './CustomButton';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import CustomButton from '../../components/BasicButton';
 
-function LoginPage({ navigation }) {
+function LoginScreen({ navigation }) {
+  
   return (
-    <View style={styles.container}>
+    <BasicWrapper>
       <View style={styles.header} />
       <View style={styles.title}>
         <Text style={{fontSize:35,paddingBottom:20}}>로그인</Text>
@@ -23,25 +22,20 @@ function LoginPage({ navigation }) {
         </View>
       </View>
       <View style={styles.footer}>
-        <CustomButton
+        <BasicButton
           buttonColor={'#444'}
           title={'취소'}
           onPress={() => alert('취소 버튼')}/>
-        <CustomButton
+        <BasicButton
         buttonColor={'#023e73'}
         title={'확인'}
         onPress={() => alert('확인 버튼')}/>
       </View>
-    </View>
+    </BasicWrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: 'white',
-  },
   header: {
     width:'100%',
     height:'5%',
@@ -66,4 +60,4 @@ const styles = StyleSheet.create({
     //backgroundColor: '#1ad657',
   },
 });
-export default LoginPage;
+export default LoginScreen;
