@@ -7,9 +7,11 @@ import BasicTitle from '../../components/BasicTitle'
 function EmailJoinScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <SimpleInput>
-
-      </SimpleInput>
+          <View style={styles.content}>
+              <SimpleInput onSubmitEditing ={() => navigation.navigate('SendEmail')}>
+                  
+              </SimpleInput>
+          </View>
     </View>
   );
 }
@@ -19,6 +21,11 @@ const styles = StyleSheet.create({
     flex:1,
     padding: 10,
     backgroundColor: '#333333',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+  content:{
+      marginBottom:200,
+  }
 });
 export default EmailJoinScreen;
