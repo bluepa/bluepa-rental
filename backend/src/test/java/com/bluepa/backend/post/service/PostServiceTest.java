@@ -4,11 +4,9 @@ import static org.mockito.ArgumentMatchers.any;
 
 import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
-import com.bluepa.backend.post.dto.FilterRequest;
 import com.bluepa.backend.post.dto.SearchRequest;
 import com.bluepa.backend.post.repository.JpaPostRepository;
 
-import com.bluepa.backend.post.util.DateRange;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
