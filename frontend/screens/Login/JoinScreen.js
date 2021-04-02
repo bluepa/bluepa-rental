@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import BasicButton from '../../components/BasicButton';
-import EmailInput from '../../components/SimpleInput'
-import BasicTitle from '../../components/BasicTitle'
 function JoinScreen({ navigation }) {
   return (
     <View style={styles.container}>

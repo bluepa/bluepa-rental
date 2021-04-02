@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import JoinScreen from '../screens/Login/JoinScreen'
 import EmailJoinScreen from '../screens/Login/EmailJoinScreen'
+import SendEmailScreen from '../screens/Login/SendEmailScreen'
 import StartScreen from '../screens/Login/StartScreen'
 
 const Stack = createStackNavigator();
@@ -22,6 +23,10 @@ function Login() {
                     headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
                 }} />
                 <Stack.Screen name="EmailJoin" component={EmailJoinScreen} options={{
+                    title: ' ',
+                    headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
+                }} />
+                <Stack.Screen name="SendEmail" component={SendEmailScreen} options={{
                     title: ' ',
                     headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
                 }} />

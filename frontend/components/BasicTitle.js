@@ -6,7 +6,7 @@ export default class BasicTitle extends Component {
         width: '100%',
         height: '18%',
         text:'untitled',
-    }
+    }   
 
     constructor(props) {
         super(props);
@@ -14,7 +14,7 @@ export default class BasicTitle extends Component {
     render() {
         return (
             <View style={styles.title, {width:this.props.width, height:this.props.height}}>
-                <Text style={styles.text}>{this.props.text}}</Text>
+                <Text style={styles.text}>{this.props.text}</Text>
                 <View style={{ width: "100%", borderBottomWidth: 0.5, borderColor: '#444' }} />
             </View>
         )

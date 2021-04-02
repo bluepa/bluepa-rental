@@ -6,6 +6,7 @@ export default class SimpleInput extends Component {
         description: '주소를 확인하기위한 이메일을 보내드리겠습니다.',
         placeholder:"내 이메일 주소",
         color:'lightgray',
+        onSubmitEditing: () => null,
     }
 
     constructor(props) {
@@ -18,7 +19,10 @@ export default class SimpleInput extends Component {
                     <TextInput
                         style={styles.input}
                         placeholder={this.props.placeholder}
-                        placeholderTextColor="lightgray" />
+                        placeholderTextColor="lightgray"
+                        color="lightgray"
+                        onSubmitEditing = {this.props.onSubmitEditing}
+                        />
                 </View>
                 <View>
                     <Text style={styles.description}>{this.props.description}</Text>
