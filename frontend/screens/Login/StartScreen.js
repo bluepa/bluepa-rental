@@ -16,12 +16,13 @@ function StartScreen({ navigation }) {
           style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
           source={require('../../assets/start_img.jpg')} />
       </View>
-      
-      <BasicButton
-            buttonColor={'#444'}
-            title={'시작하기'}
-            onPress={() => navigation.navigate('Join')} />
-      
+      <View style={styles.footer}>
+        <BasicButton
+          buttonColor={'#444'}
+          title={'시작하기'}
+          onPress={() => navigation.navigate('Join')} />
+      </View>
+
     </View>
   );
 }
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: 'black',
+    backgroundColor: '#333333',
   },
   header: {
     width: '100%',
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '20%',
   },
-  Btn:{
+  Btn: {
     width: 150,
   }
 });
