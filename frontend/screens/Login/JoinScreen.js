@@ -1,31 +1,29 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import BasicButton from '../../components/BasicButton';
-import WhiteInput from '../../components/WhiteInput'
+import EmailInput from '../../components/SimpleInput'
 import BasicTitle from '../../components/BasicTitle'
 function JoinScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <View style={styles.header} />
-      <BasicTitle text={'회원가입'}></BasicTitle>
-      <View style={styles.content}>
-        <WhiteInput
-          description={'이메일'}>
-        </WhiteInput>
-        <WhiteInput 
-          description={'비밀번호'}>
-
-        </WhiteInput>
-      </View>
-      <View style={styles.footer}>
+      <View style={styles.title}></View>
+      <View style={styles.buttons}>
         <BasicButton
           buttonColor={'#444'}
-          title={'취소'}
-          onPress={() => alert('취소 버튼')} />
+          title={'Google로 계속'}
+          onPress={() => alert('확인 버튼')} />
         <BasicButton
           buttonColor={'#023e73'}
-          title={'확인'}
+          title={'Facebook으로 계속'}
           onPress={() => alert('확인 버튼')} />
+          <BasicButton
+          buttonColor={'#FEE500'}
+          title={'Kakao로 계속'}
+          onPress={() => alert('확인 버튼')} />
+        <BasicButton
+          buttonColor={'#444'}
+          title={'Email로 계속'}
+          onPress={() =>navigation.navigate('EmailJoin')} />
       </View>
     </View>
   );
@@ -35,25 +33,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#333333',
   },
-  header: {
+  title: {
     width: '100%',
-    height: '5%',
-    //backgroundColor: '#ff9a9a',
+    height: '60%',
+    justifyContent: 'center',
   },
-  
-  content: {
-    flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 30,
-    //backgroundColor: '#d6ca1a',
-  },
-  footer: {
+  buttons: {
     width: '100%',
-    height: '20%',
+    height: '40%',
     //backgroundColor: '#1ad657',
   },
 });
+
 export default JoinScreen;
