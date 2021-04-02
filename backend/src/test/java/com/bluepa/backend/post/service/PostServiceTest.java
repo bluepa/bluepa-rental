@@ -1,12 +1,14 @@
 package com.bluepa.backend.post.service;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 import com.bluepa.backend.post.config.PostIndexNameConfig;
 import com.bluepa.backend.post.domain.Post;
 import com.bluepa.backend.post.dto.SearchRequest;
 import com.bluepa.backend.post.repository.JpaPostRepository;
-
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,10 +18,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.elasticsearch.core.geo.GeoJsonPoint;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
@@ -48,16 +46,15 @@ class PostServiceTest {
 
     @Test
     void 글쓰기() {
-        when(postRepository.save(any())).thenReturn(post);
-        when(postRepository.findById(post.getId())).thenReturn(Optional.of(post));
+        given(postRepository.save(any())).willReturn(post);
+        given(postRepository.findById(post.getId())).willReturn(Optional.of(post));
 
         String saveId = postService.write(post, "iksan");
         Post findPost = postService.findOne(saveId).get();
 
-        verify(postRepository).save(any());
-        verify(postRepository).findById(post.getId());
-        verify(postIndexNameConfig).setCityName("iksan");
-
+        then(postRepository).should().save(any());
+        then(postRepository).should().findById(post.getId());
+        then(postIndexNameConfig).should().setCityName("iksan");
         assertThat(post).isEqualTo(findPost);
     }
 
@@ -68,12 +65,11 @@ class PostServiceTest {
                 .cityName("iksan")
                 .location(GeoJsonPoint.of(123, 123))
                 .build();
-        when(postRepository.searchPost(searchRequest, null)).thenReturn(List.of(post));
+        given(postRepository.searchPost(searchRequest, null)).willReturn(List.of(post));
 
         List<Post> posts = postService.search(searchRequest, null);
 
-        verify(postRepository).searchPost(searchRequest, null);
-
+        then(postRepository).should().searchRequest(searchRequest, null);
         assertThat(post).isEqualTo(posts.get(0));
     }
 }
