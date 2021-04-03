@@ -1,3 +1,4 @@
+title: "[FE] "
 ---
 name: FE Issue
 about: FE 이슈 템플릿
