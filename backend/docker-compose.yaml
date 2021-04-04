@@ -32,6 +32,7 @@ services:
       - ./es_data:/usr/share/elasticsearch/data
     networks:
       - elastic
+
   app:
     depends_on:
       - db
