@@ -39,6 +39,6 @@ out/
 ### Properties ###
 application-*.yml
 
+### Docker binding volume ###
 **/db_data/
-
 **/es_data/
