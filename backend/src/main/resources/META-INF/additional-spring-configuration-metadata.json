@@ -1,0 +1,7 @@
+{
+  "properties": [
+    {
+      "name": "spring.elasticsearch.host",
+      "type": "java.lang.String"
+  }]
+}
