@@ -2,7 +2,6 @@ package com.bluepa.backend.global.elasticsearch;
 
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
