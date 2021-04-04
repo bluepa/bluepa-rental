@@ -40,3 +40,5 @@ out/
 application-*.yml
 
 **/db_data/
+
+**/es_data/

@@ -12,6 +12,26 @@ services:
       MYSQL_USER: test
       MYSQL_PASSWORD: test
 
+  elasticsearch:
+    image: elasticsearch:7.11.1
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m -Des.insecure.allow.root=true"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+    command:
+      - sh
+      - -c
+      - "bin/elasticsearch-plugin install analysis-nori;
+        /usr/local/bin/docker-entrypoint.sh elasticsearch"
+    volumes:
+      - ./es_data:/usr/share/elasticsearch/data
+    networks:
+      - elastic
   app:
     depends_on:
       - db
@@ -27,3 +47,8 @@ services:
       MYSQL_DB_USER: test
       MYSQL_DB_PASSWORD: test
       MYSQL_DB_NAME: bluepa
+      ELASTICSEARCH_HOST: elasticsearch:9200
+
+networks:
+  elastic:
+    driver: bridge
