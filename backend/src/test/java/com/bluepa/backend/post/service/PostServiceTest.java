@@ -69,7 +69,7 @@ class PostServiceTest {
 
         List<Post> posts = postService.search(searchRequest, null);
 
-        then(postRepository).should().searchRequest(searchRequest, null);
+        then(postRepository).should().searchPost(searchRequest, null);
         assertThat(post).isEqualTo(posts.get(0));
     }
 }
