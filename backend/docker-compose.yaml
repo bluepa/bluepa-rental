@@ -36,6 +36,7 @@ services:
   app:
     depends_on:
       - db
+      - elasticsearch
     build:
       context: .
       dockerfile: Dockerfile
