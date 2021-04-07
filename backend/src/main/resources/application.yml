@@ -7,6 +7,9 @@ spring:
     generate-ddl: true
     show-sql: true
   datasource:
+    url: jdbc:mysql://${MYSQL_DB_HOST}/${MYSQL_DB_NAME}?autoReconnect=true
+    username: ${MYSQL_DB_USER}
+    password: ${MYSQL_DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   mail:
     host: smtp.gmail.com
