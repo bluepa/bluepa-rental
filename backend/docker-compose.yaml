@@ -34,22 +34,25 @@ services:
       - elastic
 
   app:
-    depends_on:
-      - db
-      - elasticsearch
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        - JAR_FILE=build/libs/*.jar
     ports:
       - 3000:3000
+    command:
+      - sh
+      - -c
+      - "bin/wait-for db:3306 -- bundle exec rails s;
+        bin/wait-for elasticsearch:9200 -- bundle exec rails s"
     environment:
       MYSQL_DB_HOST: db:3306
       MYSQL_DB_USER: test
       MYSQL_DB_PASSWORD: test
       MYSQL_DB_NAME: bluepa
       ELASTICSEARCH_HOST: elasticsearch:9200
+    depends_on:
+      - db
+      - elasticsearch
 
 networks:
   elastic:
