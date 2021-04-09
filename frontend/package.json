@@ -21,6 +21,7 @@
     "react-native-reanimated": "2.1.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "2.18.1",
+    "react-native-svg": "12.1.0",
     "rn-bottom-drawer": "1.4.3",
     "styled-components": "5.2.3"
   },

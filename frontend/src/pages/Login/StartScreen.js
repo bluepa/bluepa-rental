@@ -1,24 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import BasicButton from '../../components/BasicButton';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import LoginLayout from '../../layouts/LoginLayout'
+import Fade from 'react-native-fade'
 function StartScreen({ navigation }) {
+
   return (
     <View style={styles.container}>
-      <View style={styles.header} />
-      <View style={styles.title}>
-        <Text style={{ fontSize: 35, color: 'white' }}>후훗{'\n'}블루파-렌탈을{'\n'}시작한다</Text>
+      <View style={styles.header}>
+        <View style={styles.title}>
+          <Fade direction="up" visible='true'>
+            <Text style={{ fontSize: 25, color: 'white' }}>안녕하세요{'\n'}블루파-렌탈을 시작합니다</Text>
+          </Fade>
+        </View>
       </View>
-      <View style={styles.content}>
-        <Image
-          style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
-          source={require('../../assets/start_img.jpg')} />
-      </View>
-      <View style={styles.footer}>
-        <BasicButton
-          buttonColor={'#444'}
-          title={'시작하기'}
-          onPress={() => navigation.navigate('Join')} />
-      </View>
+      <LoginLayout navigation ={navigation}></LoginLayout>
 
     </View>
   );
@@ -32,23 +27,14 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: '5%',
+    height: '35%',
   },
   title: {
     width: '100%',
     height: '30%',
     justifyContent: 'center',
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 30,
-  },
-  footer: {
-    width: '100%',
-    height: '20%',
-  },
+  
   Btn: {
     width: 150,
   }

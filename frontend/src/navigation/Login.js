@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import JoinScreen from '../pages/Login/JoinScreen'
 import EmailJoinScreen from '../pages/Login/EmailJoinScreen'
 import SendEmailScreen from '../pages/Login/SendEmailScreen'
 import StartScreen from '../pages/Login/StartScreen'
@@ -16,10 +15,6 @@ function Login() {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Start" component={StartScreen} options={{
-                    title: ' ',
-                    headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
-                }} />
-                <Stack.Screen name="Join" component={JoinScreen} options={{
                     title: ' ',
                     headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
                 }} />
