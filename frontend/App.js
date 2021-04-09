@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Login from './navigation/Login'
+import Login from './src/navigation/Login'
 function App() {
   return (
     <Login></Login>

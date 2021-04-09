@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import BasicButton from '../../components/BasicButton';
-import LoginDrawer from '../../components/LoginDrawer'
-
-
-function SendEmailScreen({ navigation }) {
+function StartScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header} />
-      
+      <View style={styles.title}>
+        <Text style={{ fontSize: 35, color: 'white' }}>후훗{'\n'}블루파-렌탈을{'\n'}시작한다</Text>
+      </View>
       <View style={styles.content}>
         <Image
-          style={{ tintColor: 'white',height: '100%', width: '100%', resizeMode: 'contain' }}
-          source={require('../../assets/mail.png')} />
-      </View>
-      <View style={styles.title}>
-        <Text style={{ fontSize: 35, color: 'white' }}>이메일을 확인해주세요!</Text>
+          style={{ height: '100%', width: '100%', resizeMode: 'contain' }}
+          source={require('../../assets/start_img.jpg')} />
       </View>
       <View style={styles.footer}>
+        <BasicButton
+          buttonColor={'#444'}
+          title={'시작하기'}
+          onPress={() => navigation.navigate('Join')} />
       </View>
 
     </View>
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     width: 150,
   }
 });
-export default SendEmailScreen;
+export default StartScreen;

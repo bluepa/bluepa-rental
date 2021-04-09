@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import JoinScreen from '../screens/Login/JoinScreen'
-import EmailJoinScreen from '../screens/Login/EmailJoinScreen'
-import SendEmailScreen from '../screens/Login/SendEmailScreen'
-import StartScreen from '../screens/Login/StartScreen'
+import JoinScreen from '../pages/Login/JoinScreen'
+import EmailJoinScreen from '../pages/Login/EmailJoinScreen'
+import SendEmailScreen from '../pages/Login/SendEmailScreen'
+import StartScreen from '../pages/Login/StartScreen'
 
 const Stack = createStackNavigator();
 
