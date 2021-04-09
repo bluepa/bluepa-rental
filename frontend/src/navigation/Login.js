@@ -16,22 +16,27 @@ function Login() {
             <Stack.Navigator>
                 <Stack.Screen name="Start" component={StartScreen} options={{
                     title: ' ',
-                    headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
+                    headerStyle: styles.headerStyle,
                 }} />
                 <Stack.Screen name="EmailJoin" component={EmailJoinScreen} options={{
                     title: ' ',
-                    headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
+                    headerStyle: styles.headerStyle,
                 }} />
                 <Stack.Screen name="SendEmail" component={SendEmailScreen} options={{
                     title: ' ',
-                    headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
+                    headerStyle: styles.headerStyle,
                 }} />
                 <Stack.Screen name="TypePassword" component={TypePasswordScreen} options={{
                     title: ' ',
-                    headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
+                    headerStyle: styles.headerStyle,
                 }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
 }
+const styles = StyleSheet.create({
+    headerStyle: {
+        backgroundColor: '#333333', shadowColor: 'transparent',
+    },
+})
 export default Login;
