@@ -15,7 +15,7 @@ export default class BasicTitle extends Component {
         return (
             <View style={styles.title, {width:this.props.width, height:this.props.height}}>
                 <Text style={styles.text}>{this.props.text}</Text>
-                <View style={{ width: "100%", borderBottomWidth: 0.5, borderColor: '#444' }} />
+                <View style={styles.border} />
             </View>
         )
     }
@@ -27,4 +27,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize:35,paddingBottom:20,
     },
+    border:{
+        width: "100%", borderBottomWidth: 0.5, borderColor: '#444' ,
+
+    }
 });
