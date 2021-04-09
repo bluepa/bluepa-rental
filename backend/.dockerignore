@@ -1,0 +1,5 @@
+**/db_data/
+**/es_data/
+**/.idea/
+**/.gradle/
+**/build/
