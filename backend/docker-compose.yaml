@@ -36,14 +36,9 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-test
     ports:
       - 3000:3000
-    command:
-      - sh
-      - -c
-      - "bin/wait-for db:3306 -- bundle exec rails s;
-        bin/wait-for elasticsearch:9200 -- bundle exec rails s"
     environment:
       MYSQL_DB_HOST: db:3306
       MYSQL_DB_USER: test
