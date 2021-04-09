@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import SimpleInput from '../../components/SimpleInput'
 
-function EmailJoinScreen({ navigation }) {
+function TypePasswordScreen({ navigation }) {
   return (
     <View style={styles.container}>
           <View style={styles.content}>
-              <SimpleInput onSubmitEditing ={()=>navigation.navigate('SendEmail')}>
+              <SimpleInput 
+              description = '비밀번호를 입력하세요'
+              placeholder = '내 비밀번호'
+              onSubmitEditing ={()=>alert('Login')}>
               </SimpleInput>
           </View>
     </View>
@@ -25,4 +28,4 @@ const styles = StyleSheet.create({
       marginBottom:200,
   }
 });
-export default EmailJoinScreen;
+export default TypePasswordScreen;

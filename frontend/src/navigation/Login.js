@@ -5,6 +5,7 @@ import JoinScreen from '../pages/Login/JoinScreen'
 import EmailJoinScreen from '../pages/Login/EmailJoinScreen'
 import SendEmailScreen from '../pages/Login/SendEmailScreen'
 import StartScreen from '../pages/Login/StartScreen'
+import TypePasswordScreen from '../pages/Login/TypePasswordScreen'
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,10 @@ function Login() {
                     headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
                 }} />
                 <Stack.Screen name="SendEmail" component={SendEmailScreen} options={{
+                    title: ' ',
+                    headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
+                }} />
+                <Stack.Screen name="TypePassword" component={TypePasswordScreen} options={{
                     title: ' ',
                     headerStyle: { backgroundColor: '#333333', shadowColor: 'transparent'},
                 }} />

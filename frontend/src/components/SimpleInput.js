@@ -17,7 +17,7 @@ const SimpleInput =({description,placeholder,onSubmitEditing}) => {
                     placeholder={placeholder}
                     placeholderTextColor="lightgray"
                     color="lightgray"
-                    onSubmitEditing = {()=>onSubmitEditing}
+                    onSubmitEditing = {onSubmitEditing}
                     onChangeText={text => {
                         setText(text);
                         if(!typing && text.length >0){
