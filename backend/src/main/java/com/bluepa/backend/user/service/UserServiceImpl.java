@@ -1,10 +1,10 @@
 package com.bluepa.backend.user.service;
 
-import com.bluepa.backend.global.exception.AlreadyExistingEntityException;
-import com.bluepa.backend.global.exception.DifferentCodeException;
-import com.bluepa.backend.global.exception.NotAuthenticatedEmailException;
-import com.bluepa.backend.global.exception.NotFoundEntityException;
-import com.bluepa.backend.global.exception.NotMatchedPasswordException;
+import com.bluepa.backend.user.exception.AlreadyExistingUserException;
+import com.bluepa.backend.user.exception.DifferentCodeException;
+import com.bluepa.backend.user.exception.NotAuthenticatedEmailException;
+import com.bluepa.backend.user.exception.NotFoundUserException;
+import com.bluepa.backend.user.exception.NotMatchedPasswordException;
 import com.bluepa.backend.global.security.JwtProvider;
 import com.bluepa.backend.user.domain.EmailAuth;
 import com.bluepa.backend.user.domain.User;
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String signIn(SignInRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new NotFoundEntityException(User.class, "email", request.getEmail()));
+            .orElseThrow(() -> new NotFoundUserException(request.getEmail()));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new NotMatchedPasswordException();
@@ -78,14 +78,14 @@ public class UserServiceImpl implements UserService {
         Optional<String> email = Optional.ofNullable((String) httpSession.getAttribute("email"));
         httpSession.removeAttribute("email");
         User user = email.flatMap(userRepository::findByEmail)
-            .orElseThrow(() -> new NotFoundEntityException(User.class, "email", email.orElse(null)));
+            .orElseThrow(() -> new NotFoundUserException(email.orElse(null)));
         return jwtProvider.createToken(user);
     }
 
     @Override
     public void sendEmail(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new AlreadyExistingEntityException(User.class, "email", email);
+            throw new AlreadyExistingUserException(User.class, "email", email);
         }
 
         int authCode = (int) (Math.random() * 900000 + 100000);
@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void authenticateEmail(String email, int code) {
         EmailAuth emailAuth = emailAuthRepository.findByEmail(email)
-            .orElseThrow(() -> new NotFoundEntityException(EmailAuth.class, "email", email));
+            .orElseThrow(() -> new NotAuthenticatedEmailException(email));
 
         if (emailAuth.isDifferentCode(code)) {
             throw new DifferentCodeException();
