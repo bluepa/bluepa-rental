@@ -13,6 +13,7 @@ const LoginLayout = ({ navigation }) => {
                     title={'시작하기'}
                     onPress={() => setVisible(true)} />
             </Fade>
+            
         );
     }
     else {
