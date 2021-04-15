@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import LoginLayout from '../../layouts/LoginLayout'
+import StartLayout from '../../layouts/StartLayout'
 import Fade from 'react-native-fade'
+import GlobalStyles, { colorStyle,colorSet } from '../../GlobalStyles'
 function StartScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.title}>
-          <Fade direction="up" visible='true'>
-            <Text style={{ fontSize: 25, color: 'white' }}>안녕하세요{'\n'}블루파-렌탈을 시작합니다</Text>
-          </Fade>
-        </View>
-      </View>
-      <LoginLayout navigation ={navigation}></LoginLayout>
-
+      <StartLayout></StartLayout>
     </View>
   );
 }
@@ -23,7 +16,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#333333',
+    ...colorStyle.background,
   },
   header: {
     width: '100%',

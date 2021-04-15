@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import {fontStyle,colorSet} from '../GlobalStyles';
 
 const StartLayout = () =>{
     return(
@@ -12,16 +13,26 @@ const StartLayout = () =>{
 }
 
 const styles = StyleSheet.create({
-    title: {
-
+    title:{
+        ...fontStyle.title,
+        color:colorSet.theme,
+        textAlign:'center',
+        justifyContent:'center',
     },
     subtitle:{
-
+        ...fontStyle.medium_bold,
+        textAlign:'center',
+        justifyContent:'center',
+        color:colorSet.defaultBlack,
     },
     description: {
-
+        ...fontStyle.small,
+        textAlign:'center',
+        justifyContent:'center',
+        color: colorSet.defaultBlack,
     },
     footer: {
 
     },
 })
+export default StartLayout;
