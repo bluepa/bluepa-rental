@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, TextInput } from 'react-native';
-import SimpleInput from '../../components/SimpleInput'
-
+import { StyleSheet, Button, View, Image, TextInput } from 'react-native';
+import BoxInput from '../../components/BoxInput'
+import WhiteInput from '../../components/WhiteInput'
+import {colorStyle} from '../../GlobalStyles'
+import SigninLayout from '../../layouts/SigninLayout'
 function EmailJoinScreen({ navigation }) {
   return (
     <View style={styles.container}>
           <View style={styles.content}>
-              <SimpleInput onSubmitEditing ={()=>navigation.navigate('SendEmail')}>
-              </SimpleInput>
+              <SigninLayout></SigninLayout>
           </View>
     </View>
   );
@@ -15,14 +16,12 @@ function EmailJoinScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    ...colorStyle.background,
     flex:1,
     padding: 10,
-    backgroundColor: '#333333',
-    justifyContent: 'center',
-    alignItems: 'center',
+    
   },
   content:{
-      marginBottom:200,
   }
 });
 export default EmailJoinScreen;

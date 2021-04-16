@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import StartLayout from '../../layouts/StartLayout'
 import Fade from 'react-native-fade'
 import GlobalStyles, { colorStyle,colorSet } from '../../GlobalStyles'
-function StartScreen({ navigation }) {
 
+function CheckAccountScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <StartLayout navigation = {navigation}></StartLayout>
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
     width: 150,
   }
 });
-export default StartScreen;
+export default CheckAccountScreen;
