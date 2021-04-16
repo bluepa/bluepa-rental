@@ -4,6 +4,7 @@ export const colorSet = {
     background : 'white',
     theme : '#ff8b3e',
     defaultBlack:'black',
+    softGrey:'#d8d8dc',
 };
 export const imgSrc={
     home:require('./assets/start_img.jpg'),

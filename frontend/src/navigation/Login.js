@@ -21,7 +21,7 @@ function Login() {
                     headerStyle: colorStyle.header,
                 }} />
                 <Stack.Screen name="EmailJoin" component={EmailJoinScreen} options={{
-                    title: '이메일 로그인',
+                    title: '로그인',
                     headerStyle: colorStyle.header,
                 }} />
                 <Stack.Screen name="SendEmail" component={SendEmailScreen} options={{
